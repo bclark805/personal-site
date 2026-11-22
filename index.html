@@ -1,0 +1,426 @@
+<title>J. Blake Clark, PhD</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one long page; a sticky section index, then research areas as anchored sections, each tagged with its field site's coordinates. */
+:root {
+  --bg: #f6f8f9;
+  --surface: #ffffff;
+  --fg: #142027;
+  --muted: #4f6470;
+  --line: #d6e0e5;
+  --accent: #0d6e7a;
+  --accent-soft: #e1f0f2;
+  --ice: #9cc9d3;
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d161b; --surface: #13212a; --fg: #e4edf1; --muted: #9db2bd;
+    --line: #26394463; --accent: #5ec3cf; --accent-soft: #163640; --ice: #2f5d69;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d161b; --surface: #13212a; --fg: #e4edf1; --muted: #9db2bd;
+  --line: #26394463; --accent: #5ec3cf; --accent-soft: #163640; --ice: #2f5d69;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg);
+  font: 16px/1.6 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+.wrap { max-width: 980px; margin: 0 auto; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; line-height: 1.15; margin: 0; }
+h2 { font-size: clamp(1.5rem, 3vw, 1.9rem); font-weight: 700; }
+h3 { font-size: 1.2rem; font-weight: 700; }
+p { margin: 0; max-width: 65ch; }
+.label { font: 500 0.75rem/1.2 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+
+header.hero { padding-block: 64px 40px; display: grid; gap: 20px; border-bottom: 1px solid var(--line); }
+.hero h1 { font-size: clamp(2.4rem, 7vw, 4.2rem); font-weight: 700; letter-spacing: -0.02em; }
+.hero h1 span { color: var(--muted); font-weight: 500; }
+.hero .lede { font-size: 1.2rem; color: var(--fg); max-width: 60ch; }
+.hero .now { display: flex; flex-wrap: wrap; gap: 8px 20px; color: var(--muted); font-size: 0.95rem; }
+.contour { width: 100%; height: 72px; display: block; }
+.contour path { fill: none; stroke: var(--ice); stroke-width: 1.2; }
+
+nav.index { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); }
+nav.index ul { list-style: none; margin: 0; padding: 10px 0; display: flex; gap: 6px 18px; overflow-x: auto; white-space: nowrap; font-size: 0.92rem; }
+nav.index a { color: var(--muted); text-decoration: none; }
+nav.index a:hover, nav.index a:focus-visible { color: var(--accent); }
+
+section { padding-block: 48px; border-bottom: 1px solid var(--line); display: grid; gap: 24px; scroll-margin-top: 56px; }
+.two { display: grid; grid-template-columns: 220px 1fr; gap: 24px 40px; }
+.two > * { min-width: 0; }
+@media (max-width: 720px) { .two { grid-template-columns: 1fr; } }
+.stack { display: grid; gap: 14px; }
+#publications .stack > h3:not(:first-child) { margin-top: 18px; }
+
+.areas { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+.areas a { display: grid; gap: 6px; padding: 16px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); text-decoration: none; color: var(--fg); }
+.areas a:hover, .areas a:focus-visible { border-color: var(--accent); }
+.areas .coord { font: 400 0.78rem var(--mono); color: var(--accent); }
+.areas strong { font-family: var(--display); font-size: 1.05rem; }
+.areas span.sub { color: var(--muted); font-size: 0.92rem; }
+
+.area { display: grid; gap: 14px; }
+.area .meta { display: flex; flex-wrap: wrap; gap: 6px 16px; font: 400 0.8rem var(--mono); color: var(--muted); }
+.area .meta b { color: var(--accent); font-weight: 500; }
+.area ul { margin: 0; padding-left: 1.1rem; display: grid; gap: 6px; max-width: 65ch; }
+.tag { display: inline-block; font: 500 0.72rem var(--mono); letter-spacing: 0.05em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+.area + .area { padding-top: 28px; border-top: 1px dashed var(--line); }
+
+.timeline { display: grid; gap: 18px; }
+.job { display: grid; grid-template-columns: 150px 1fr; gap: 4px 24px; }
+.job > * { min-width: 0; }
+.job .when { font: 400 0.85rem var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; padding-top: 2px; }
+.job .org { color: var(--muted); }
+@media (max-width: 560px) { .job { grid-template-columns: 1fr; } }
+
+ol.pubs { margin: 0; padding: 0; list-style: none; display: grid; gap: 16px; }
+ol.pubs li { display: grid; grid-template-columns: 56px 1fr; gap: 16px; }
+ol.pubs .yr { font: 500 0.9rem var(--mono); color: var(--accent); font-variant-numeric: tabular-nums; }
+ol.pubs .t { font-weight: 600; }
+ol.pubs .v { color: var(--muted); font-size: 0.93rem; }
+ol.pubs li > div { min-width: 0; overflow-wrap: anywhere; }
+
+.skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+.skills div { display: grid; gap: 6px; }
+.skills p { color: var(--muted); font-size: 0.95rem; }
+
+.rtec { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 24px; display: grid; gap: 12px; }
+
+dl.contact { display: grid; grid-template-columns: 110px 1fr; gap: 8px 20px; margin: 0; }
+dl.contact dt { font: 500 0.8rem var(--mono); color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; padding-top: 3px; }
+dl.contact dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.placeholder { border: 1px dashed var(--muted); border-radius: 4px; padding: 1px 8px; color: var(--muted); font-family: var(--mono); font-size: 0.9rem; }
+footer { padding-block: 32px 48px; color: var(--muted); font-size: 0.85rem; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+.intro { display: flex; flex-wrap: wrap; align-items: center; gap: 20px 28px; }
+.intro > .stack { min-width: 0; }
+.portrait { width: 112px; height: 112px; flex: none; border-radius: 50%; border: 1.5px dashed var(--muted); background: var(--accent-soft); display: grid; place-items: center; }
+.portrait span { font: 500 0.72rem var(--mono); color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.offclock { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+.offclock div { display: grid; gap: 6px; align-content: start; }
+.offclock p { color: var(--muted); font-size: 0.95rem; }
+.quote { font-family: var(--display); font-size: clamp(1.2rem, 2.4vw, 1.5rem); line-height: 1.35; max-width: 40ch; }
+
+/* Story: chapters alternate photo collage and text; photo frames are placeholders until real images go in. */
+.story { gap: 56px; }
+.chapter { display: grid; grid-template-columns: 1.25fr 1fr; gap: 24px 40px; align-items: center; }
+.chapter > * { min-width: 0; }
+.chapter.flip .photos { order: 2; }
+@media (max-width: 760px) { .chapter { grid-template-columns: 1fr; } .chapter.flip .photos { order: 0; } }
+.photos { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.ph { margin: 0; aspect-ratio: 4 / 3; max-width: 100%; border-radius: 6px; border: 1.5px dashed var(--muted); background: var(--accent-soft); display: grid; place-items: end start; padding: 10px; overflow: hidden; }
+.ph.big { grid-column: 1 / -1; aspect-ratio: 16 / 9; }
+.ph span { font: 500 0.72rem var(--mono); color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.ph img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ph.filled { padding: 0; border: 0; background: none; position: relative; }
+.ph.filled figcaption { position: absolute; left: 8px; bottom: 8px; right: 8px; width: fit-content; max-width: calc(100% - 16px); font: 500 0.68rem var(--mono); text-transform: uppercase; letter-spacing: 0.05em; color: #fff; background: rgba(10, 20, 26, 0.62); padding: 3px 7px; border-radius: 4px; }
+.portrait.filled { border: 0; overflow: hidden; }
+.portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 42% 38%; display: block; }
+.chapter .text { display: grid; gap: 12px; }
+.chap { font: 500 0.75rem/1.3 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.chapter h2 { font-size: clamp(1.5rem, 3.2vw, 2.1rem); }
+.more { font-size: 0.92rem; }
+</style>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="intro">
+      <div class="portrait filled"><img src="photos/portrait.jpg" alt="Blake by a river in the Sierra in winter"></div>
+      <div class="stack">
+        <h1>Hi, I'm Blake.</h1>
+        <span class="label">J. Blake Clark, PhD · Earth scientist · modeler · team lead</span>
+      </div>
+    </div>
+    <p class="lede">I grew up on California's Central Coast, followed the ocean into a career in science, and now live in Reno near the Sierra. I like hard problems with real stakes, and I like working through them with good people.</p>
+    <div class="now">
+      <span>Reno, Nevada</span>
+      <span>Formerly NASA Goddard Space Flight Center</span>
+      <span>Founder, R-TEC</span>
+    </div>
+    <svg class="contour" viewBox="0 0 980 72" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 52 C120 40 220 62 340 48 S560 30 680 44 S880 58 980 40"/>
+      <path d="M0 36 C140 26 240 46 360 32 S580 16 700 28 S890 40 980 24"/>
+      <path d="M0 20 C150 12 260 30 380 18 S600 4 720 14 S900 24 980 10"/>
+    </svg>
+  </header>
+
+  <nav class="index" aria-label="Sections">
+    <ul>
+      <li><a href="#story">Story</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#rtec">R-TEC</a></li>
+      <li><a href="#offclock">Off the clock</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section id="story" class="story">
+    <div class="stack">
+      <span class="label">The story so far</span>
+      <p class="quote">Most of my career has been about one question: what happens to water, and everything in it, on its way from land to sea?</p>
+    </div>
+
+    <article class="chapter" id="ch-coast">
+      <div class="photos">
+        <figure class="ph big filled"><img src="photos/beach-sunset.jpg" alt="Blake and family on a beach at sunset" loading="lazy" style="object-position:center 45%"><figcaption>Sunset on the beach</figcaption></figure>
+        <figure class="ph filled"><img src="photos/baseball-nipomo.jpg" alt="A youth baseball team in Nipomo uniforms" loading="lazy" style="object-position:center"><figcaption>Youth baseball in Nipomo</figcaption></figure>
+        <figure class="ph filled"><img src="photos/football-54.jpg" alt="Blake in a number 54 football jersey after a game" loading="lazy" style="object-position:center 30%"><figcaption>Number 54, Friday nights</figcaption></figure>
+        <figure class="ph filled"><img src="photos/family-winery.jpg" alt="Blake and family by wine barrels with vineyards behind" loading="lazy" style="object-position:center 40%"><figcaption>With family at the winery</figcaption></figure>
+        <figure class="ph filled"><img src="photos/graduation-2012.jpg" alt="Blake in cap and gown with family at graduation" loading="lazy" style="object-position:center 38%"><figcaption>Graduation day, 2012</figcaption></figure>
+      </div>
+      <div class="text">
+        <span class="chap">Chapter 1 · San Luis Obispo and Santa Barbara · to 2012</span>
+        <h2>It started at the coast</h2>
+        <p>I grew up in San Luis Obispo, close enough to the ocean that it was part of everyday life. That pull took me to UC Santa Barbara, where I earned a B.S. in Aquatic Biology in 2012 and started asking how coastal waters actually work.</p>
+      </div>
+    </article>
+
+    <article class="chapter flip" id="ch-phd">
+      <div class="photos">
+        <figure class="ph big filled"><img src="photos/boat-selfie.jpg" alt="Blake grinning on a boat with its wake behind him and pine-lined shores" loading="lazy" style="object-position:center 40%"><figcaption>Out on the water</figcaption></figure>
+        <figure class="ph filled"><img src="photos/good-laugh.jpg" alt="Blake laughing at a family gathering" loading="lazy" style="object-position:center 30%"><figcaption>A good laugh</figcaption></figure>
+        <figure class="ph filled"><img src="photos/phd-graduation-2019-v2.jpg" alt="Blake in doctoral robes with family at the UMCES graduation" loading="lazy" style="object-position:center 30%"><figcaption>PhD day at UMCES, 2019</figcaption></figure>
+      </div>
+      <div class="text">
+        <span class="chap">Chapter 2 · Chesapeake Bay, Maryland · 2014 to 2019</span>
+        <h2>Learning to model a marsh</h2>
+        <p>At the University of Maryland's Horn Point Laboratory, I built 3-D models of a tidal marsh and estuary, then tied them to what we measured in the water. That work became a PhD in 2019 and a full carbon budget for the system.</p>
+        <a class="more" href="#estuaries">The research behind this chapter</a>
+      </div>
+    </article>
+
+    <article class="chapter" id="ch-postdoc">
+      <div class="photos">
+        <figure class="ph big filled"><img src="photos/flight-summer.jpg" alt="Aerial view of winding river channels and tundra lakes from a small plane" loading="lazy" style="object-position:center 60%"><figcaption>Over the delta by bush plane</figcaption></figure>
+        <figure class="ph filled"><img src="photos/flight-winter.jpg" alt="Snow-covered river channels and willows seen from a small plane" loading="lazy" style="object-position:center"><figcaption>The same country in winter</figcaption></figure>
+        <figure class="ph filled"><img src="photos/pike-on-ice.jpg" alt="Blake holding a northern pike on a frozen river" loading="lazy" style="object-position:center 45%"><figcaption>A pike through the ice</figcaption></figure>
+      </div>
+      <div class="text">
+        <span class="chap">Chapter 3 · NASA Goddard and the Yukon · 2019 to 2021</span>
+        <h2>A postdoc through a pandemic</h2>
+        <p>I started as a NASA Postdoctoral Fellow in 2019, studying how the Yukon River carries carbon into the Bering Sea. A year later the pandemic shut down travel, fieldwork and normal life. I kept going: the plume model, the experiments and the papers all came out of those years, and in 2021 NASA Goddard brought me on as a research scientist.</p>
+        <p>The Yukon stayed with me after that. I kept working on the delta until I left NASA in 2025, and these photos come from one of those later trips north.</p>
+        <a class="more" href="#yukon">The research behind this chapter</a>
+      </div>
+    </article>
+
+    <article class="chapter flip" id="ch-arctic">
+      <div class="photos">
+        <figure class="ph big filled"><img src="photos/on-the-ramp.jpg" alt="A white and blue government jet on an airport ramp under grey skies" loading="lazy" style="object-position:center"><figcaption>On the ramp</figcaption></figure>
+        <figure class="ph filled"><img src="photos/nasa-jet.jpg" alt="Blake standing in front of a NASA research jet" loading="lazy" style="object-position:center 62%"><figcaption>With a NASA research jet</figcaption></figure>
+        <figure class="ph filled"><img src="photos/flight-high.jpg" alt="Snowy northern landscape with rivers and lakes seen from high altitude" loading="lazy" style="object-position:center"><figcaption>Snow country from above</figcaption></figure>
+      </div>
+      <div class="text">
+        <span class="chap">Chapter 4 · The Beaufort Sea and FORTE · 2021 to 2025</span>
+        <h2>Helping lead a NASA mission</h2>
+        <p>I built a new high-resolution model of the coastal Beaufort Sea and machine-learning tools for water quality, and became Deputy Principal Investigator of FORTE, a $15M NASA field mission built with Alaska Native communities, industry and local partners. Along the way came two NASA Peer Awards.</p>
+        <a class="more" href="#arctic-coast">The research behind this chapter</a>
+      </div>
+    </article>
+
+    <article class="chapter" id="ch-mountains">
+      <div class="photos">
+        <figure class="ph big filled"><img src="photos/chairlift.jpg" alt="Chairlift through snow-loaded pines on a sunny day" loading="lazy" style="object-position:center 55%"><figcaption>Up the lift on a powder day</figcaption></figure>
+        <figure class="ph filled"><img src="photos/ride-reno-day.jpg" alt="Mountain bike handlebars above a view of Reno" loading="lazy" style="object-position:center"><figcaption>Riding above Reno</figcaption></figure>
+        <figure class="ph filled"><img src="photos/trail-pines.jpg" alt="Rocky singletrack through ponderosa pines" loading="lazy" style="object-position:center 60%"><figcaption>Singletrack in the pines</figcaption></figure>
+      </div>
+      <div class="text">
+        <span class="chap">Chapter 5 · Reno and Tahoe · 2025 to now</span>
+        <h2>Into the mountains</h2>
+        <p>In 2025 I left NASA and moved to the Sierra. I ran lift operations at Northstar, leading a 132-person crew, which taught me as much about people, safety and staying calm under pressure as any research project did. I also started R-TEC, an environmental consulting firm for the Reno-Tahoe region.</p>
+        <p>Next, I want to put modeling, statistics and machine learning to work where the numbers drive real decisions, in science, data or quantitative roles in Reno, Sacramento or the San Francisco Bay Area.</p>
+        <a class="more" href="#rtec">About R-TEC</a>
+      </div>
+    </article>
+  </section>
+
+  <section id="research">
+    <div class="stack">
+      <span class="label">The work in detail</span>
+      <h2>Research areas</h2>
+    </div>
+    <div class="areas">
+      <a href="#arctic-coast"><span class="coord">70.4°N 148.5°W</span><strong>Arctic coastal ocean modeling</strong><span class="sub">The coastal Beaufort Sea and the FORTE mission</span></a>
+      <a href="#arctic-rivers"><span class="coord">Pan-Arctic · 1982–2019</span><strong>Arctic rivers and carbon</strong><span class="sub">38 years of discharge and dissolved organic matter</span></a>
+      <a href="#remote-sensing"><span class="coord">Satellite + in situ</span><strong>Remote sensing and machine learning</strong><span class="sub">Predicting coastal water quality for managers</span></a>
+      <a href="#yukon"><span class="coord">62.6°N 164.8°W</span><strong>Yukon River delta and plume</strong><span class="sub">Fresh water, wind and carbon from river to Bering Sea</span></a>
+      <a href="#estuaries"><span class="coord">38.6°N 76.1°W</span><strong>Estuarine biogeochemistry</strong><span class="sub">Chesapeake Bay tidal marshes and carbon budgets</span></a>
+      <a href="#sea-ice"><span class="coord">In progress</span><strong>Sea ice thermodynamics in Python</strong><span class="sub">An open library built on CICE and Icepack physics</span></a>
+    </div>
+
+    <article id="arctic-coast" class="area">
+      <h3>Arctic coastal ocean modeling</h3>
+      <div class="meta"><span><b>Site</b> coastal Beaufort Sea, Alaska</span><span><b>Tools</b> 3-D hydrodynamic model, NASA HPC</span></div>
+      <p>The shallow Arctic coast changes fast as sea ice retreats and rivers deliver more fresh water. I built a high-resolution 3-D hydrodynamic model of the coastal Beaufort Sea, forced by winds, tides, open-ocean sea level, river discharge and sea ice, and evaluated its skill formally against observations.</p>
+      <ul>
+        <li>Model construction and evaluation published in <i>Frontiers in Marine Science</i> (2025).</li>
+        <li>Deputy PI of FORTE (2024–2030): co-led science design and modeling strategy across institutions, and worked with Alaska Native, industry and local partners.</li>
+        <li>Ran large simulations on NASA high-performance computing systems across thousands of CPUs.</li>
+      </ul>
+    </article>
+
+    <article id="arctic-rivers" class="area">
+      <h3>Arctic rivers and carbon</h3>
+      <div class="meta"><span><b>Span</b> 1982–2019</span><span><b>Data</b> discharge and dissolved organic carbon, major Arctic rivers</span></div>
+      <p>I analysed 38 years of discharge and carbon records across the major Arctic rivers to separate how much of the change in carbon export comes from changes in discharge itself (<i>Global Biogeochemical Cycles</i>, 2023). The code and data are public on Zenodo.</p>
+    </article>
+
+    <article id="remote-sensing" class="area">
+      <h3>Remote sensing and machine learning for water quality</h3>
+      <div class="meta"><span><b>Program</b> DEEP-VIEW, NASA AIST ($1.1M)</span><span><b>Tools</b> Python, scikit-learn, satellite imagery</span></div>
+      <p>Resource managers need water clarity and quality maps where few measurements exist. I co-developed DEEP-VIEW, a machine-learning pipeline that combines satellite imagery, field observations and model output to predict coastal water quality.</p>
+      <ul>
+        <li>A water-distance (non-Euclidean) interpolation method that adds labelled training data where observations are sparse (IEEE IGARSS 2024).</li>
+        <li>Co-authored weighted-regression methods that improved prediction of extreme water clarity values from satellite data (IEEE IGARSS 2023).</li>
+        <li>Pairing satellite data with AERONET-OC to track river plumes in Chesapeake Bay (<i>Remote Sensing</i>, 2025).</li>
+        <li>Land-to-ocean observing systems for organic carbon carried by storms (<i>Estuarine, Coastal and Shelf Science</i>, 2024).</li>
+      </ul>
+    </article>
+
+    <article id="yukon" class="area">
+      <h3>Yukon River delta and plume</h3>
+      <div class="meta"><span><b>Site</b> Yukon River delta and the northern Bering Sea, Alaska</span><span><b>Tools</b> 3-D plume model, field and lab experiments</span></div>
+      <p>The Yukon is one of the largest rivers draining to the Arctic, and its delta and plume decide how much of its carbon reaches the ocean. First as a NASA Postdoctoral Fellow and then as a research scientist, I modelled the Yukon River plume in the Bering Sea, measured how fresh water and wind control its strength and reach, and followed how organic carbon changes on its way from river to delta to sea.</p>
+      <ul>
+        <li>How river flow and wind set the size and strength of the plume (<i>Frontiers in Marine Science</i>, 2022).</li>
+        <li>Faster loss of the delta's colored dissolved organic matter when nutrients are plentiful (<i>Limnology and Oceanography</i>, 2021).</li>
+        <li>How organic carbon is transformed and exported across the river, delta and ocean (<i>JGR: Biogeosciences</i>, 2022).</li>
+        <li>How dissolved organic matter mixes where the Yukon and Kolyma rivers meet the sea (<i>Marine Chemistry</i>, 2023).</li>
+      </ul>
+    </article>
+
+    <article id="estuaries" class="area">
+      <h3>Estuarine biogeochemistry</h3>
+      <div class="meta"><span><b>Site</b> Chesapeake Bay tidal marsh and estuary</span><span><b>Tools</b> FVCOM, ICM</span></div>
+      <p>For my PhD at the University of Maryland's Horn Point Laboratory, I built a coupled 3-D hydrodynamic and biogeochemical model of a Chesapeake Bay tidal marsh and estuary and used it to produce a full carbon budget.</p>
+      <ul>
+        <li>A comprehensive estuarine dissolved organic carbon budget (<i>JGR: Biogeosciences</i>, 2020).</li>
+        <li>A mechanistic model of how sunlight breaks down colored dissolved organic matter (<i>Marine Chemistry</i>, 2019).</li>
+        <li>Wind-driven organic matter exchange between a tidal marsh and the estuary (<i>Estuaries and Coasts</i>, 2018) and in sediments (<i>JGR: Biogeosciences</i>, 2017).</li>
+        <li>Ecological forecasting and the science of hypoxia in Chesapeake Bay (<i>BioScience</i>, 2017).</li>
+      </ul>
+    </article>
+
+    <article id="sea-ice" class="area">
+      <h3>Sea ice thermodynamics in Python <span class="tag">In progress</span></h3>
+      <p>I'm writing a Python library that solves sea ice growth and melt using the physics of the CICE and Icepack models. Next steps are optical properties for the ice and water column and a radiative transfer model for UV and visible heating.</p>
+    </article>
+  </section>
+
+  <section id="experience" class="two">
+    <span class="label">Experience</span>
+    <div class="timeline">
+      <div class="job"><span class="when">2026 – now</span><div><h3>Data Scientist / AI Trainer</h3><span class="org">DataAnnotation · remote</span><p>Evaluate and correct AI model outputs on technical and quantitative tasks.</p></div></div>
+      <div class="job"><span class="when">2025 – 2026</span><div><h3>Manager, Lift Operations</h3><span class="org">Northstar California (Vail Resorts) · Truckee, CA</span><p>Led a 132-person team: 2 assistant managers, 10 leads and 120 staff.</p></div></div>
+      <div class="job"><span class="when">2021 – 2025</span><div><h3>Associate Research Scientist</h3><span class="org">NASA Goddard Space Flight Center / UMBC GESTAR II</span><p>Arctic coastal modeling, satellite machine learning, and Deputy PI of FORTE.</p></div></div>
+      <div class="job"><span class="when">2019 – 2021</span><div><h3>NASA Postdoctoral Fellow</h3><span class="org">NASA Goddard Space Flight Center / USRA</span><p>Yukon River plume dynamics in the Bering Sea.</p></div></div>
+      <div class="job"><span class="when">2014 – 2019</span><div><h3>Graduate Research Assistant</h3><span class="org">University of Maryland Center for Environmental Science, Horn Point Laboratory</span><p>PhD, Marine, Estuarine and Environmental Science, 2019.</p></div></div>
+      <div class="job"><span class="when">2012</span><div><h3>B.S., Aquatic Biology</h3><span class="org">University of California, Santa Barbara</span></div></div>
+    </div>
+  </section>
+
+  <section id="publications" class="two">
+    <span class="label">Publications</span>
+    <div class="stack">
+      <h3>Journal articles</h3>
+      <ol class="pubs">
+        <li><span class="yr">2025</span><div><span class="t">A new high-resolution hydrodynamic model for the coastal Beaufort Sea in the Arctic Ocean: model construction and evaluation.</span><br><span class="v">Clark, J. B., Moses, W., El-Habashi, A., Tzortziou, M., Turner, K. J., Waga, H., Ackelson, S., Sherman, J. <i>Frontiers in Marine Science</i> 12, 1580690. <a href="https://doi.org/10.3389/fmars.2025.1580690">doi:10.3389/fmars.2025.1580690</a></span></div></li>
+        <li><span class="yr">2025</span><div><span class="t">Augmenting satellite remote sensing with AERONET-OC for plume monitoring in the Chesapeake Bay.</span><br><span class="v">Smith, S. L., Schollaert Uz, S., Clark, J. B., Aurin, D. <i>Remote Sensing</i> 17(10), 1767.</span></div></li>
+        <li><span class="yr">2024</span><div><span class="t">Toward the future integration of land-to-ocean observing systems to characterize organic carbon fluxes from storms.</span><br><span class="v">Clark, J. B., Schollaert Uz, S. <i>Estuarine, Coastal and Shelf Science</i> 302, 108694.</span></div></li>
+        <li><span class="yr">2023</span><div><span class="t">Quantification of discharge-specific effects on dissolved organic matter export from major Arctic rivers from 1982 through 2019.</span><br><span class="v">Clark, J. B., Mannino, A., Spencer, R. G. M., Tank, S. E., McClelland, J. W. <i>Global Biogeochemical Cycles</i> 37(8), e2023GB007854.</span></div></li>
+        <li><span class="yr">2023</span><div><span class="t">Mixing behavior of dissolved organic matter at the Yukon and Kolyma land ocean interface.</span><br><span class="v">Kellerman, A. M., Hernes, P. J., McKenna, A. M., Clark, J. B., et al. <i>Marine Chemistry</i> 255, 104281.</span></div></li>
+        <li><span class="yr">2022</span><div><span class="t">The transformation and export of organic carbon across an Arctic river-delta-ocean continuum.</span><br><span class="v">Clark, J. B., Mannino, A., Tzortziou, M., Spencer, R. G. M., Hernes, P. <i>Journal of Geophysical Research: Biogeosciences</i> 127(12), e2022JG007139.</span></div></li>
+        <li><span class="yr">2022</span><div><span class="t">The impacts of freshwater input and surface wind velocity on the strength and extent of a large high latitude river plume.</span><br><span class="v">Clark, J. B., Mannino, A. <i>Frontiers in Marine Science</i> 8, 793217. <a href="https://doi.org/10.3389/fmars.2021.793217">doi:10.3389/fmars.2021.793217</a></span></div></li>
+        <li><span class="yr">2022</span><div><span class="t">Arctic biogeochemical and optical properties of dissolved organic matter across river to sea gradients.</span><br><span class="v">Novak, M. G., Mannino, A., Clark, J. B., Hernes, P., Tzortziou, M., Spencer, R. G. M., Kellerman, A. M., Grunert, B. <i>Frontiers in Marine Science</i> 9, 949034. <a href="https://doi.org/10.3389/fmars.2022.949034">doi:10.3389/fmars.2022.949034</a></span></div></li>
+        <li><span class="yr">2021</span><div><span class="t">Preferential loss of Yukon River delta colored dissolved organic matter under nutrient replete conditions.</span><br><span class="v">Clark, J. B., Mannino, A. <i>Limnology and Oceanography</i> 66(5), 1613–1626.</span></div></li>
+        <li><span class="yr">2021</span><div><span class="t">Photochemical and microbial degradation of chromophoric dissolved organic matter exported from tidal marshes.</span><br><span class="v">Logozzo, L., Tzortziou, M., Neale, P., Clark, J. B. <i>Journal of Geophysical Research: Biogeosciences</i> 126(4), e2020JG005744.</span></div></li>
+        <li><span class="yr">2020</span><div><span class="t">A comprehensive estuarine dissolved organic carbon budget using an enhanced biogeochemical model.</span><br><span class="v">Clark, J. B., Long, W., Hood, R. R. <i>Journal of Geophysical Research: Biogeosciences</i> 125(5), e2019JG005442.</span></div></li>
+        <li><span class="yr">2019</span><div><span class="t">A mechanistic model of photochemical transformation and degradation of colored dissolved organic matter.</span><br><span class="v">Clark, J. B., Neale, P., Tzortziou, M., Cao, F., Hood, R. R. <i>Marine Chemistry</i> 214, 103666.</span></div></li>
+        <li><span class="yr">2018</span><div><span class="t">Wind-driven dissolved organic matter dynamics in a Chesapeake Bay tidal marsh-estuary system.</span><br><span class="v">Clark, J. B., Long, W., Tzortziou, M., Neale, P. J., Hood, R. R. <i>Estuaries and Coasts</i> 41(3), 708–723.</span></div></li>
+        <li><span class="yr">2017</span><div><span class="t">Estuarine sediment dissolved organic matter dynamics in an enhanced sediment flux model.</span><br><span class="v">Clark, J. B., Long, W., Hood, R. R. <i>Journal of Geophysical Research: Biogeosciences</i> 122(10), 2669–2682.</span></div></li>
+        <li><span class="yr">2017</span><div><span class="t">Ecological forecasting and the science of hypoxia in Chesapeake Bay.</span><br><span class="v">Testa, J. M., Clark, J. B., Dennison, W. C., Donovan, E. C., Fisher, A. W., Ni, W., et al. <i>BioScience</i> 67(7), 614–626.</span></div></li>
+      </ol>
+
+      <h3>Conference papers</h3>
+      <ol class="pubs">
+        <li><span class="yr">2024</span><div><span class="t">Non-Euclidean water distance based interpolation for increased mapping of coastal water clarity.</span><br><span class="v">Clark, J. B., Schollaert Uz, S., Ames, T. <i>IEEE IGARSS 2024</i>. <a href="https://doi.org/10.1109/IGARSS53475.2024.10642570">doi:10.1109/IGARSS53475.2024.10642570</a></span></div></li>
+        <li><span class="yr">2024</span><div><span class="t">Deep-View: integration of coastal observations and models to inform water quality resource managers and decisions.</span><br><span class="v">Schollaert Uz, S., Ames, T. J., Clark, J. B., Smith, S. L. <i>IEEE IGARSS 2024</i>.</span></div></li>
+        <li><span class="yr">2023</span><div><span class="t">Improving extreme value prediction for water clarity using weighted regression models.</span><br><span class="v">Daniels, W., Ames, T., Clark, J. B., Schollaert Uz, S. <i>IEEE IGARSS 2023</i>.</span></div></li>
+        <li><span class="yr">2022</span><div><span class="t">Assessing carbon properties in coastal waters with a new observing system testbed.</span><br><span class="v">Clark, J. B., Schollaert Uz, S., Tsontos, V., Huang, T., Scott, J., Rogers, L. <i>OCEANS 2022, Hampton Roads</i>, 1–6.</span></div></li>
+      </ol>
+
+      <h3>Selected talks and abstracts</h3>
+      <ol class="pubs">
+        <li><span class="yr">2025</span><div><span class="t">Advancing global river discharge estimates: integrating remote sensing, modeling, and monitoring for sustainable water resource management.</span><br><span class="v">Meshesha, T. W. W., Rousseaux, C. S., Clark, J. B. <i>AGU Fall Meeting</i>, H51B-01.</span></div></li>
+        <li><span class="yr">2023</span><div><span class="t">Integration of satellite and in situ observations into machine learning for coastal water quality.</span><br><span class="v">Schollaert Uz, S., Ames, T. J., Clark, J. B., Aurin, D. <i>EGU General Assembly</i>.</span></div></li>
+        <li><span class="yr">2022</span><div><span class="t">The transformation and export of organic carbon in the Yukon River delta and plume.</span><br><span class="v">Clark, J. B., Mannino, A., Tzortziou, M., Spencer, R., Hernes, P. <i>Ocean Sciences Meeting</i>.</span></div></li>
+        <li><span class="yr">2021</span><div><span class="t">Linking optics and biogeochemical models to better quantify marine carbon cycling.</span><br><span class="v">Clark, J. B. <i>Ocean Carbon and Biogeochemistry Summer Workshop</i>.</span></div></li>
+        <li><span class="yr">2020</span><div><span class="t">Biodegradation of Yukon River delta dissolved organic matter is marginally enhanced by nutrient enrichment.</span><br><span class="v">Clark, J. B., Mannino, A. <i>Ocean Sciences Meeting</i>, HE34B-1996.</span></div></li>
+      </ol>
+
+      <h3>Thesis</h3>
+      <ol class="pubs">
+        <li><span class="yr">2019</span><div><span class="t">Development of a biogeochemical modeling system to estimate fluxes and controls of estuarine organic matter cycling.</span><br><span class="v">Clark, J. B. PhD dissertation, University of Maryland. <a href="https://doi.org/10.13016/anfz-tron">doi:10.13016/anfz-tron</a></span></div></li>
+      </ol>
+      <p style="color:var(--muted)">Citation counts and the latest additions are on <a href="https://scholar.google.com/citations?user=l-ARhroAAAAJ">Google Scholar</a>.</p>
+    </div>
+  </section>
+
+  <section id="skills">
+    <span class="label">Skills</span>
+    <div class="skills">
+      <div><h3>Statistics and data science</h3><p>Extreme value and weighted-regression methods, Bayesian/MCMC, Monte Carlo simulation, time-series analysis, machine learning, model validation</p></div>
+      <div><h3>Earth system data</h3><p>Winds and storms, river discharge, sea level and sea ice, satellite remote sensing, in situ observations, NetCDF model output</p></div>
+      <div><h3>Programming</h3><p>Python (NumPy, pandas, SciPy, xarray, scikit-learn, TensorFlow, Dask), Fortran, MATLAB, R, SQL, Linux/HPC, Git; GDAL, rasterio, geopandas</p></div>
+      <div><h3>Leadership and communication</h3><p>Deputy PI on a multi-institution mission, Co-Chair of the NASA Carbon Monitoring System Wet Carbon Working Group, briefing non-specialists, leading a 132-person team</p></div>
+    </div>
+  </section>
+
+  <section id="rtec">
+    <div class="rtec">
+      <span class="label">Consulting</span>
+      <h2>R-TEC: Reno-Tahoe Environmental Consulting</h2>
+      <p>My consulting firm helps local agencies and organizations in Nevada County and beyond with environmental needs, from compliance to long-term risk assessment. It leans on AI, satellite imagery and drone and high-resolution photography, and delivers full service through licensed partners.</p>
+    </div>
+  </section>
+
+  <section id="offclock" class="two">
+    <span class="label">Off the clock</span>
+    <div class="offclock">
+      <div><figure class="ph filled"><img src="photos/dog-river.jpg" alt="A happy dog sitting by a mountain river" loading="lazy" style="object-position:center 70%"><figcaption>Family includes the dog</figcaption></figure><h3>Family first</h3><p>Most of my favorite time is spent with my family.</p></div>
+      <div><figure class="ph filled"><img src="photos/ride-reno-night.jpg" alt="Night ride with a bike light and city lights below" loading="lazy" style="object-position:center 60%"><figcaption>Night laps above the city</figcaption></figure><h3>Trails and snow</h3><p>Living near Tahoe means mountain biking when the trails are dry and snow sports all winter.</p></div>
+      <div><figure class="ph"><span>The horse-trough hot tub</span></figure><h3>Building things</h3><p>Home projects, art projects, landscaping and DIY of every kind. During COVID I turned a horse trough into a hot tub.</p></div>
+      <div><figure class="ph"><span>Your sea ice model output</span></figure><h3>Tinkering with code</h3><p>I'm building an open-source Python library for sea ice physics, mostly because I want one to exist.</p></div>
+    </div>
+  </section>
+
+  <section id="contact" class="two">
+    <span class="label">Contact</span>
+    <dl class="contact">
+      <dt>Email</dt><dd><span style="user-select:all">chair.rtec@gmail.com</span></dd>
+      <dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/blake-clark-4b297815b">linkedin.com/in/blake-clark-4b297815b</a></dd>
+      <dt>GitHub</dt><dd><a href="https://github.com/bclark805">github.com/bclark805</a></dd>
+      <dt>Scholar</dt><dd><a href="https://scholar.google.com/citations?user=l-ARhroAAAAJ">Google Scholar profile</a></dd>
+      <dt>CV</dt><dd><span class="placeholder">PDF to link here</span></dd>
+    </dl>
+  </section>
+
+  <footer>J. Blake Clark · Reno, Nevada</footer>
+</div>
